@@ -1,0 +1,27 @@
+import os
+
+# Define the structure
+structure = {
+   "my_search_engine": {
+       "my_search_engine": ["__init__.py", "engine.py", "document.py", "index.py", "search.py", "utils.py"],
+       "tests": ["__init__.py", "test_engine.py", "test_document.py", "test_index.py", "test_search.py"],
+       "setup.py": "",
+       "README.md": "",
+       ".gitignore": ""
+   }
+}
+
+# Function to create the structure
+def create_structure(structure, path="."):
+   for name, contents in structure.items():
+       new_path = os.path.join(path, name)
+       if isinstance(contents, list):
+           os.makedirs(new_path, exist_ok=True)
+           for content in contents:
+               with open(os.path.join(new_path, content), "w") as f:
+                  pass # Write the content here if needed
+       elif isinstance(contents, dict):
+           create_structure(contents, new_path)
+
+# Create the structure
+create_structure(structure)
